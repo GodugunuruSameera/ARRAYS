@@ -1,0 +1,113 @@
+Our Chef is hosting a cooking competition in which only two teams can compete at the same time. Both sides should have an equal number of participants to make the competition engaging and fair. Chef was given the duty of forming the two teams as an organizer.
+There are various conditions for forming teams. He will be assigned a number ‘N’ for each competition, and for each divisor ‘D’ of ‘N’ (including 1 and ‘N’ itself), he will add a member:
+
+If ‘D’ is even, go to the first team.
+if ‘D’ is odd, go to the second team.
+Chef needs your assistance with the event planning because he is quite busy. Your job is to advise the chef whether or not he can make two teams with the same amount of members.
+For Example:
+For ‘N’ = 10,
+The divisors are:
+1, 2, 5, 10.
+The first team will have two members corresponding to even divisors 2 and 10.
+The second team will have two members corresponding to odd divisors 1 and 5.
+So, in this case, Chef can make two teams.
+
+Input Format
+First line will contain 
+T
+T, number of testcases. Then the testcases follow.
+The first and only line of each test case contains an integer ‘N’ denoting the number given to Chef.
+Output Format
+For each test case print 1 if Chef can make two teams of equal members with the given ‘N’, else print 0.
+
+Output for each test case will be printed in a separate line.
+
+Constraints
+1
+≤
+T
+≤
+1000
+1≤T≤1000
+1
+≤
+N
+≤
+10
+5
+1≤N≤10 
+5
+ 
+It is guaranteed that the sum of N over all test cases doesn’t exceed 10^5.
+
+Time Limit: 1 sec
+
+Sample 1
+Inputcopy	Outputcopy
+2
+7
+14
+0
+1
+In test case 1:
+N = 7, the divisors of 7 are 1,7.
+The first team will have 0 members since there are no even divisors.
+The second team will have 2 members corresponding to divisors 1 and 7.
+Since the teams have a different number of members, the output will be 0.
+
+In test case 2:
+
+N=14, the divisors of 14 are 1,2,7,14.
+The first team will have 2 members corresponding to divisors 2 and 14.
+The second team will have 2 members corresponding to divisors 1 and 7.
+Since the teams have the same number of members, the output will be 1.
+
+Sample 2
+Inputcopy	Outputcopy
+2
+2
+20
+1
+0
+
+CODE:
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+
+        while (T-- > 0) {
+            int N = sc.nextInt();
+
+            int[] divisors = new int[1000];
+            int count = 0;
+
+            for (int i = 1; i <= N; i++) {
+                if (N % i == 0) {
+                    divisors[count] = i;
+                    count++;
+                }
+            }
+
+            int evenCount = 0;
+            int oddCount = 0;
+
+            for (int i = 0; i < count; i++) {
+                if (divisors[i] % 2 == 0)
+                    evenCount++;
+                else
+                    oddCount++;
+            }
+
+            if (evenCount == oddCount)
+                System.out.println(1);
+            else
+                System.out.println(0);
+        }
+
+        sc.close();
+    }
+}
